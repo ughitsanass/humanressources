@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OffreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('offres', function () {
+    return view('Offres');
+});
+
 Route::get('/dashRecruteur', function () {
     return view('dashRecruteur');
 })->middleware(['auth'])->name('dashboard');
@@ -26,3 +31,7 @@ Route::get('/dashCandidat', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::resource('offres',OffreController::class);
+
+

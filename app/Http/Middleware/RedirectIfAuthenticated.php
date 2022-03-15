@@ -20,10 +20,16 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
-
+$candrecru=Auth::user();
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+
+                if ($candrecru['statut']==0){
+                    return redirect(RouteServiceProvider::CANDIDAT);
+                }else{
+                    return redirect(RouteServiceProvider::RECRUTEUR);
+                }
+
             }
         }
 

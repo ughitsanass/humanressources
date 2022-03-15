@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidat;
+use App\Models\Recruteur;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -47,10 +49,26 @@ class RegisteredUserController extends Controller
             'statut'=> $request->statut,
         ]);
 
-        event(new Registered($user));
 
+        if ($user['statut']==0){
+
+            $candidat = Candidat::create([
+                'id_utilisateur' => $user['id'],
+            ]);
+
+        }else{
+            $recruteur = Recruteur::create([
+                'id_utilisateur' => $user['id'],
+            ]);
+        }
+
+        event(new Registered($user));
         Auth::login($user);
 
+
+
+
+        Auth::user()->getAuthIdentifierName();
         if ($user['statut']==0){
             return redirect(RouteServiceProvider::CANDIDAT);
         }elseif ($user['statut']==1){
