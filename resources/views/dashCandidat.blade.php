@@ -14,16 +14,48 @@
             <div class="bg-white border rounded shadow p-2">
                 <div class="flex flex-row items-center">
                     <div class="flex-shrink pr-4">
-                        <div class="rounded p-3 bg-blue-600"><i class="fa fa-wallet fa-2x fa-fw fa-inverse"></i></div>
+                        <div class="rounded p-3 bg-blue-600"><i class="fa fa-list fa-2x fa-fw fa-inverse"></i></div>
                     </div>
                     @php
                         $totalrevenue = DB::table('users')->count();
                         $totalusers = DB::table('users')->count();
 
+
+
+                    $mescandidatures = DB::table('candidature')
+                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
+                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
+                    ->select('*')
+                    ->count();
+
+                    $mescandidaturesget = DB::table('candidature')
+                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
+                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->id)
+                    ->select('*')
+                    ->get();
+
+                    $mescandidaturestrue = DB::table('candidature')
+                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
+                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
+                    ->where('statut', true)
+                    ->select('*')
+                    ->count();
+
+                    $mescandidaturesfalse = DB::table('candidature')
+                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
+                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
+                    ->where('statut',false)
+                    ->select('*')
+                    ->count();
                     @endphp
                     <div class="flex-1 text-right md:text-center">
-                        <h5 class="font-bold uppercase text-gray-500">Total des Candidatures</h5>
-                        <h3 class="font-bold text-3xl"> {{$totalrevenue}}<span class="text-blue-500"><i class="fas fa-caret-up"></i></span></h3>
+                        <h5 class="font-bold uppercase text-gray-500">Mes Candidatures</h5>
+
+                        <h3 class="font-bold text-3xl"> {{$mescandidatures }}</h3>
                     </div>
                 </div>
             </div>
@@ -38,7 +70,7 @@
                     </div>
                     <div class="flex-1 text-right md:text-center">
                         <h5 class="font-bold uppercase text-gray-500">Accepté</h5>
-                        <h3 class="font-bold text-3xl"> {{$totalrevenue}}</h3>
+                        <h3 class="font-bold text-3xl"> {{$mescandidaturestrue}}</h3>
                     </div>
                 </div>
             </div>
@@ -49,11 +81,11 @@
             <div class="bg-white border rounded shadow p-2">
                 <div class="flex flex-row items-center">
                     <div class="flex-shrink pr-4">
-                        <div class="rounded p-3 bg-yellow-600"><i class="fas fa-user-plus fa-2x fa-fw fa-inverse"></i></div>
+                        <div class="rounded p-3 bg-yellow-600"><i class="fas fa-user-minus fa-2x fa-fw fa-inverse"></i></div>
                     </div>
                     <div class="flex-1 text-right md:text-center">
                         <h5 class="font-bold uppercase text-gray-500">refusé</h5>
-                        <h3 class="font-bold text-3xl">2 </h3>
+                        <h3 class="font-bold text-3xl">{{$mescandidaturesfalse}} </h3>
                     </div>
                 </div>
             </div>
@@ -62,8 +94,36 @@
 
 
 
+
+
+
+
+
         </div>
+
+
+    <br><br>
+    <h2> {{\Illuminate\Support\Facades\Auth::user()->name}}, vous avez candidaté à {{$mescandidatures}} Offres</h2>
+    <div class="w-1/2 ">
+
+        {{$mescandidaturesget}}
+        <!--Metric Card-->
+        @foreach($mescandidaturesget as $candidature)
+        <div class="bg-white border rounded shadow p-2">
+            <div class="flex flex-row items-center">
+                <div class="flex-1 text-right md:text-center">
+                    <h5 class="font-bold uppercase text-gray-500">Candidature n°: {{$candidature->id_offre}}</h5>
+                    <h3 class="font-bold text-3xl"> </h3>
+                </div>
+            </div>
+        </div>
+    @endforeach
+        <!--/Metric Card-->
     </div>
+
+    </div>
+
+
 
 </x-app-layout>
 

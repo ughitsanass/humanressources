@@ -1,1 +1,2 @@
-<?php
+
+Portail offre : {{$offre->type}}

@@ -19,8 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('offres', function () {
-    return view('Offres');
-});
+    return view('offres.index');
+})->middleware(['auth'])->name('offres');
 
 Route::get('/dashRecruteur', function () {
     return view('dashRecruteur');
@@ -32,6 +32,6 @@ Route::get('/dashCandidat', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('offres',OffreController::class);
+
 
 
