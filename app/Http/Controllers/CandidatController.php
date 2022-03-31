@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidatRequest;
 use App\Models\Candidat;
+use App\Models\Tournoi;
 use Illuminate\Http\Request;
 
 class CandidatController extends Controller
@@ -15,7 +16,7 @@ class CandidatController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return view('candidat.index');
     }
 
     /**
@@ -58,7 +59,8 @@ class CandidatController extends Controller
      */
     public function edit(Candidat $candidat)
     {
-       return view('edit',compact('candidat'));
+        return view('edit', compact('candidat'));
+
     }
 
     /**
@@ -69,6 +71,13 @@ class CandidatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(CandidatRequest $request, Candidat $candidat) {
+
+        $candidat = Candidat::find($candidat);
+        $candidat = Candidat::where('',$candidat)->first();
+        $candidat->name = $request->input('name');
+        $candidat->save();
+
+
         $candidat->update($request->all());
         return redirect()->route('candidat.index');
     }

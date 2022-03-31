@@ -27,6 +27,8 @@ class UserRequest extends FormRequest
             'name' => 'bail|required|min:1|max:100|string',
             'email' => 'bail|required|string',
             'statut' => 'bail|required|numeric|between:0,1',
+            'numtel' => 'bail|required|numeric',
+            'adresse' => 'bail|required'
 
         ];
     }

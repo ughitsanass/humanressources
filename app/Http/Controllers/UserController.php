@@ -36,7 +36,10 @@ class UserController extends Controller
      */
         public function store(UserRequest $request, User $user)
     {
-
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->numtel=$request->numtel;
+        $user->save();
 }
 
 
@@ -58,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $candidat)
     {
-        return view('edit',compact('user'));
+        return view('candidat.edit',compact('candidat'));
     }
 
     /**

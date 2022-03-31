@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\OffreController;
+
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,8 @@ Route::get('/dashCandidat', function () {
 
 require __DIR__.'/auth.php';
 
+
+Route::resource('candidat',UserController::class);
 
 
 
