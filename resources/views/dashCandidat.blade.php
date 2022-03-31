@@ -102,18 +102,22 @@
         </div>
 
 
-    <br><br>
-    <h2> {{\Illuminate\Support\Facades\Auth::user()->name}}, vous avez candidaté à {{$mescandidatures}} Offres</h2>
     <div class="w-1/2 ">
 
-        {{$mescandidaturesget}}
+
         <!--Metric Card-->
         @foreach($mescandidaturesget as $candidature)
         <div class="bg-white border rounded shadow p-2">
             <div class="flex flex-row items-center">
                 <div class="flex-1 text-right md:text-center">
-                    <h5 class="font-bold uppercase text-gray-500">Candidature n°: {{$candidature->id_offre}}</h5>
+                    <h5 class="font-bold uppercase text-gray-500">Candidature -- Poste : {{$candidature->type}}</h5>
                     <h3 class="font-bold text-3xl"> </h3>
+                    <hr>
+                    <p><i>Diplôme requis</i> : {{$candidature->diplome_requis}}  &nbsp;||&nbsp; <i>Votre diplôme : {{$candidature->diplome}}</i></p>
+                    <hr>
+                    <p><i>rémunération </i> : {{$candidature->remuneration}}</p>
+                    <hr>
+                    <p><i>ville :</i> {{$candidature->ville}}</p>
                 </div>
             </div>
         </div>

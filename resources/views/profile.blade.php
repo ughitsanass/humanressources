@@ -15,8 +15,6 @@ $users = DB::table('users')
             ->first()
             ;
 
-
-
 @endphp
 
 

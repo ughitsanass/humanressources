@@ -4,19 +4,21 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Candidat - {{old('name',$candidat->name)}} </title>
+    <title>Candidat - @php if($candidat->id == \Illuminate\Support\Facades\Auth::user()->id) { echo old('name',$candidat->name); }else{
+    echo 'inconnu';
+} @endphp</title>
 </head>
 <body>
 
-
 @php
-    use Illuminate\Support\Facades\DB;
-
-$whoami = \Illuminate\Support\Facades\Auth::user()->statut;
+/** vérifier le bon utilisateur */
+use App\Providers\RouteServiceProvider;use Illuminate\Support\Facades\DB;
 
 $myid = \Illuminate\Support\Facades\Auth::user()->id;
 
+if($candidat->id == $myid) {
 
+$whoami = \Illuminate\Support\Facades\Auth::user()->statut;
 $whoisme = DB::table('candidats')
         ->join('users', 'candidats.id_utilisateur', '=', 'users.id')
         ->where('users.id',$myid)
@@ -49,14 +51,16 @@ $diplomes = DB::table('candidats')
         ->select('candidats.diplome')
         ->get();
 
+$diploma="";
 foreach ($diplomes as $diplome){}
+$diploma = $diplome->diplome;
 
-$diploma = $diplome->diplome
+}else{
+   return redirect(RouteServiceProvider::CANDIDAT);
+}
 
 
 @endphp
-
-
 <style>
     body {
         background: rgb(99, 39, 120)

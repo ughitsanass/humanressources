@@ -22,6 +22,12 @@
                         {{ __('Offres') }}
                     </x-nav-link>
                     @endif
+
+                    @if (\Illuminate\Support\Facades\Auth::user()->statut==0)
+                    <x-nav-link : href="candidat/{{\Illuminate\Support\Facades\Auth::user()->id}}/edit">
+                        {{ __('Profil') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
