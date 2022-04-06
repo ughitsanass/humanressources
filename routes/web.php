@@ -36,5 +36,7 @@ require __DIR__.'/auth.php';
 
 Route::resource('candidat',UserController::class);
 
+Route::post('/candidat/{candidat}/edit', [UserController::class, 'update'])->name('candidat.test');
+
 
 

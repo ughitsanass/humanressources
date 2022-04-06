@@ -122,7 +122,7 @@ $diploma = $diplome->diplome;
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Editer le profil</h4>
                 </div>
-                <form method="POST" action="{{ route('candidat.update', $candidat->id) }}">
+                <form method="POST" action="{{ route('candidat.test', $candidat->id) }}">
                     <div class="row mt-2">
                         <div class="col-md-6"><label class="labels">Nom et prénom</label><input type="text"
                                                                                                 class="form-control"
@@ -166,6 +166,8 @@ $diploma = $diplome->diplome;
                                                                                            readonly></div>
 
                     </div>
+
+
 
                     <div class="mt-5 text-center">
                         <button class="btn btn-primary profile-button" type="submit">Enregistrer</button>

@@ -65,15 +65,16 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
         Auth::login($user);
 
-
-
-
         Auth::user()->getAuthIdentifierName();
         if ($user['statut']==0){
             return redirect(RouteServiceProvider::CANDIDAT);
         }elseif ($user['statut']==1){
             return redirect(RouteServiceProvider::RECRUTEUR);
+        }else{
+            return redirect(RouteServiceProvider::HOME);
         }
 
+
+        mysqli_get_host_info();
     }
 }
