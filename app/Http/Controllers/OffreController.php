@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OffreRequest;
 use App\Models\Offre;
+use App\Models\Tournoi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,11 +17,7 @@ class OffreController extends Controller
      */
     public function index()
     {
-        $offres = DB::table('offres')
-            ->join('recruteurs', 'offres.id_recruteur', '=', 'recruteurs.id')
-            ->select('recruteurs.id')
-            ->get();
-
+        $offres=Offre::all();
         return view('offres.index',compact('offres'));
     }
 
@@ -71,9 +68,9 @@ class OffreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Offre $offre)
     {
-
+        return view('edit', compact('offre'));
     }
 
     /**
@@ -83,9 +80,10 @@ class OffreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OffreRequest $request, Offre $offre)
     {
-        //
+        $offre->update($request->all());
+        return redirect()->route('offre.index');
     }
 
 

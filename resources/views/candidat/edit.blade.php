@@ -13,7 +13,7 @@
 @php
 /** vérifier le bon utilisateur */
 use App\Providers\RouteServiceProvider;use Illuminate\Support\Facades\DB;
-
+var_dump($_POST);
 $myid = \Illuminate\Support\Facades\Auth::user()->id;
 
 if($candidat->id == $myid) {
@@ -122,7 +122,10 @@ $diploma = $diplome->diplome;
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Editer le profil</h4>
                 </div>
-                <form method="POST" action="{{ route('candidat.test', $candidat->id) }}">
+
+                <form method="POST" action="{{ route('candidat.update', $candidat->id) }}">
+                    {{ csrf_field() }}
+                    {{ method_field('POST') }}
                     <div class="row mt-2">
                         <div class="col-md-6"><label class="labels">Nom et prénom</label><input type="text"
                                                                                                 class="form-control"

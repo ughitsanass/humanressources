@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\OffreController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('offres', function () {
-    return view('offres.index');
-})->middleware(['auth'])->name('offres');
 
 Route::get('/dashRecruteur', function () {
     return view('dashRecruteur');
@@ -35,8 +33,11 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('candidat',UserController::class);
+//Route::any('candidat',UserController::class);
 
-Route::post('/candidat/{candidat}/edit', [UserController::class, 'update'])->name('candidat.test');
+//Route::post('/candidat/{candidat}/edit', [UserController::class, 'update'])->name('candidat.test');
+Route::post('/candidat/{user}/edit', [UserController::class, 'update'])->name('candidat.edit');
 
+Route::resource('offres',OffreController::class);
 
 
