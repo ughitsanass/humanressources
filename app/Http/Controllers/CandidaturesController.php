@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\UserRequest;
-use App\Models\User;
+
+use App\Models\Candidat;
+use App\Models\Candidature;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class CandidaturesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //récupération des inforamations de la personne connectée !
-        $user=User::all()->where('id',Auth::id());
-        return view('users.index',compact('user'));
+        if (Auth::user()->statut == 0){
+            $candidatures = Candidature::all()->where('id_candidat', Auth::id());
+            return view('candidatures.index',compact('candidatures'));
+        }
+
     }
 
     /**
@@ -26,6 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -34,15 +39,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-        public function store(UserRequest $request, User $user)
+    public function store(Request $request)
     {
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->numtel=$request->numtel;
-        $user->save();
-}
-
-
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -50,9 +50,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return view('view',compact('user'));
+        //
     }
 
     /**
@@ -61,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('candidat.edit',compact('user'));
+        //
     }
 
     /**
@@ -73,9 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, $id)
     {
-        $user->update($request->all());
+        //
     }
 
     /**
@@ -84,9 +84,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Candidature $candidature)
     {
-        $user->delete();
-        return redirect()->route('formation.index');
+        $candidature->delete();
+        return redirect()->route('candidatures.index');
     }
+
 }

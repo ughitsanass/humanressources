@@ -1,6 +1,6 @@
 
 
-/*! choices.js v3.0.4 | (c) 2018 Josh Johnson | https://github.com/jshjohnson/Choices#readme */ 
+/*! choices.js v3.0.4 | (c) 2018 Josh Johnson | https://github.com/jshjohnson/Choices#readme */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -199,7 +199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      itemChoice: 'item-choice'
 	    };
 
-	    // Merge options with user options
+	    // Merge options with candidat options
 	    this.config = (0, _utils.extend)(defaultConfig, userConfig);
 
 	    if (this.config.renderSelectedChoices !== 'auto' && this.config.renderSelectedChoices !== 'always') {
@@ -487,7 +487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          placeholderChoices = _rendererableChoices$.placeholderChoices,
 	          normalChoices = _rendererableChoices$.normalChoices;
 
-	      // If sorting is enabled or the user is searching, filter choices
+	      // If sorting is enabled or the candidat is searching, filter choices
 
 
 	      if (this.config.shouldSort || this.isSearching) {
@@ -861,7 +861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      items.forEach(function (item) {
 	        if (item.highlighted && item.active) {
 	          _this8._removeItem(item);
-	          // If this action was performed by the user
+	          // If this action was performed by the candidat
 	          // trigger the event
 	          if (runEvent) {
 	            _this8._triggerChange(item.value);
@@ -873,7 +873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Show dropdown to user by adding active state class
+	     * Show dropdown to candidat by adding active state class
 	     * @return {Object} Class instance
 	     * @public
 	     */
@@ -918,7 +918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Hide dropdown from user
+	     * Hide dropdown from candidat
 	     * @return {Object} Class instance
 	     * @public
 	     */
@@ -1325,7 +1325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Process click of an item
 	     * @param {Array} activeItems The currently active items
 	     * @param  {Element} element Item being interacted with
-	     * @param  {Boolean} hasShiftKey Whether the user has the shift key active
+	     * @param  {Boolean} hasShiftKey Whether the candidat has the shift key active
 	     * @return
 	     * @private
 	     */
@@ -1358,7 +1358,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 	        });
 
-	        // Focus input as without focus, a user cannot do anything with a
+	        // Focus input as without focus, a candidat cannot do anything with a
 	        // highlighted item
 	        if (document.activeElement !== this.input) {
 	          this.input.focus();
@@ -1444,10 +1444,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Validates whether an item can be added by a user
+	     * Validates whether an item can be added by a candidat
 	     * @param {Array} activeItems The currently active items
 	     * @param  {String} value     Value of item to add
-	     * @return {Object}           Response: Whether user can add item
+	     * @return {Object}           Response: Whether candidat can add item
 	     *                            Notice: Notice show in dropdown
 	     */
 
@@ -1467,7 +1467,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      if (this.isTextElement && this.config.addItems && canAddItem) {
-	        // If a user has supplied a regular expression filter
+	        // If a candidat has supplied a regular expression filter
 	        if (this.config.regexFilter) {
 	          // Determine whether we can update based on whether
 	          // our regular expression passes
@@ -1616,8 +1616,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Determine the action when a user is searching
-	     * @param  {String} value Value entered by user
+	     * Determine the action when a candidat is searching
+	     * @param  {String} value Value entered by candidat
 	     * @return
 	     * @private
 	     */
@@ -1768,7 +1768,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var pageDownKey = 34;
 	      var ctrlDownKey = e.ctrlKey || e.metaKey;
 
-	      // If a user is typing and the dropdown is not active
+	      // If a candidat is typing and the dropdown is not active
 	      if (!this.isTextElement && /[a-zA-Z0-9-_ ]/.test(keyString) && !hasActiveDropdown) {
 	        this.showDropdown(true);
 	      }
@@ -1940,7 +1940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var backKey = 46;
 	        var deleteKey = 8;
 
-	        // If user has removed value...
+	        // If candidat has removed value...
 	        if ((e.keyCode === backKey || e.keyCode === deleteKey) && !e.target.value) {
 	          // ...and it is a multiple select input, activate choices (if searching)
 	          if (!this.isTextElement && this.isSearching) {
@@ -1996,7 +1996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var target = e.target || e.touches[0].target;
 	      var hasActiveDropdown = this.dropdown.classList.contains(this.config.classNames.activeState);
 
-	      // If a user tapped within our container...
+	      // If a candidat tapped within our container...
 	      if (this.wasTap === true && this.containerOuter.contains(target)) {
 	        // ...and we aren't dealing with a single select box, show dropdown/focus input
 	        if ((target === this.containerOuter || target === this.containerInner) && !this.isSelectOneElement) {
@@ -2403,7 +2403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {String} [label] Label to add to store
 	     * @param {Number} [choiceId=-1] ID of the associated choice that was selected
 	     * @param {Number} [groupId=-1] ID of group choice is within. Negative number indicates no group
-	     * @param {Object} [customProperties] Object containing user defined properties
+	     * @param {Object} [customProperties] Object containing candidat defined properties
 	     * @return {Object} Class instance
 	     * @public
 	     */
@@ -2515,7 +2515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {Boolean} [isSelected=false] Whether choice is selected
 	     * @param {Boolean} [isDisabled=false] Whether choice is disabled
 	     * @param {Number} [groupId=-1] ID of group choice is within. Negative number indicates no group
-	     * @param {Object} [customProperties] Object containing user defined properties
+	     * @param {Object} [customProperties] Object containing candidat defined properties
 	     * @return
 	     * @private
 	     */
@@ -2817,7 +2817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	          });
 
-	          // If sorting is enabled or the user is searching, filter choices
+	          // If sorting is enabled or the candidat is searching, filter choices
 	          if (this.config.shouldSort) {
 	            allChoices.sort(filter);
 	          }
@@ -4064,7 +4064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/*
 	* This is a dummy function to check if the function name has been altered by minification.
-	* If the function has been minified and NODE_ENV !== 'production', warn the user.
+	* If the function has been minified and NODE_ENV !== 'production', warn the candidat.
 	*/
 	function isCrushed() {}
 
@@ -4120,7 +4120,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @param {any} [preloadedState] The initial state. You may optionally specify it
 	   * to hydrate the state from the server in universal apps, or to restore a
-	   * previously serialized user session.
+	   * previously serialized candidat session.
 	   * If you use `combineReducers` to produce the root reducer function, this must be
 	   * an object with the same shape as `combineReducers` keys.
 	   *
@@ -4234,7 +4234,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * middleware will eventually dispatch plain object actions using this method.
 	   *
 	   * @param {Object} action A plain object representing “what changed”. It is
-	   * a good idea to keep actions serializable so you can record and replay user
+	   * a good idea to keep actions serializable so you can record and replay candidat
 	   * sessions, or use the time travelling `redux-devtools`. An action must have
 	   * a `type` property which may not be `undefined`. It is a good idea to use
 	   * string constants for action types.
@@ -5885,7 +5885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {Boolean}
 	 */
 	var isInView = exports.isInView = function isInView(el, position, offset) {
-	  // If the user has scrolled further than the distance from the element to the top of its parent
+	  // If the candidat has scrolled further than the distance from the element to the top of its parent
 	  return this.getScrollPosition(position) > this.getElemDistance(el) + this.getElementOffset(el, offset) ? true : false;
 	};
 

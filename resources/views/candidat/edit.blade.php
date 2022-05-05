@@ -13,7 +13,6 @@
 @php
 /** vérifier le bon utilisateur */
 use App\Providers\RouteServiceProvider;use Illuminate\Support\Facades\DB;
-var_dump($_POST);
 $myid = \Illuminate\Support\Facades\Auth::user()->id;
 
 if($candidat->id == $myid) {

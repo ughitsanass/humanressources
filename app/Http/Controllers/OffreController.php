@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OffreRequest;
+use App\Models\Candidature;
 use App\Models\Offre;
-use App\Models\Tournoi;
+
+use http\QueryString;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+
+
 
 class OffreController extends Controller
 {
@@ -29,7 +35,6 @@ class OffreController extends Controller
     public function create()
     {
         return view('offres.create');
-
     }
 
     /**
@@ -40,14 +45,14 @@ class OffreController extends Controller
      */
     public function store(OffreRequest $request, Offre $offre)
     {
-        $offre->nomformation=$request->nomformation;
-        $offre->datedebut=$request->datedebut;
-        $offre->duree=$request->duree;
-        $offre->unite=$request->unite;
-        $offre->idcategorie=$request->idcategorie;
+        $offre->id_recruteur=Auth::id();
+        $offre->id_entreprise=2;
+        $offre->type=$request->type;
+        $offre->ville=$request->ville;
+        $offre->diplome_requis=$request->diplome_requis;
+        $offre->remuneration=$request->remuneration;
         $offre->save();
-        return redirect()->route('offres.index')->with('offre crée');
-
+        return redirect()->route('offres.index');
     }
 
     /**
@@ -59,7 +64,6 @@ class OffreController extends Controller
     public function show(Offre $offre)
     {
         return view('offres.show', compact('offre'));
-
     }
 
     /**
@@ -70,7 +74,7 @@ class OffreController extends Controller
      */
     public function edit(Offre $offre)
     {
-        return view('edit', compact('offre'));
+        return view('offres.edit', compact('offre'));
     }
 
     /**
@@ -83,14 +87,9 @@ class OffreController extends Controller
     public function update(OffreRequest $request, Offre $offre)
     {
         $offre->update($request->all());
-        return redirect()->route('offre.index');
+        return redirect()->route('offres.index');
     }
 
-
-
-    public function candidater(Request $candidater, Offre $offre){
-
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -100,6 +99,17 @@ class OffreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // destroy that shit bro
     }
+
+
+    public function candidater($id){
+        Candidature::create([
+            'id_offre' => $id,
+            'id_candidat' => Auth::id(),
+            'statut' => 0
+        ]);
+        return redirect()->route('offres.index')->with('candidature bien enregistrée');
+    }
+
 }

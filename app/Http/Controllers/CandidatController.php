@@ -60,7 +60,6 @@ class CandidatController extends Controller
     public function edit(Candidat $candidat)
     {
         return view('edit', compact('candidat'));
-
     }
 
     /**
@@ -70,21 +69,18 @@ class CandidatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CandidatRequest $request, Candidat $candidat) {
 
+    public function update(CandidatRequest $request, Candidat $candidat) {
         $candidat = Candidat::find($candidat);
         $candidat = Candidat::where('',$candidat)->first();
         $candidat->name = $request->input('name');
         $candidat->save();
-
-
         $candidat->update($request->all());
         return redirect()->route('candidat.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

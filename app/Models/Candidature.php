@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Offre extends Model
+class Candidature extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'id',
-        'id_recruteur' ,
-        'id_entreprise' ,
-        'type' ,
-        'ville',
-        'diplome_requis',
-        'remuneration'
+        'id_candidat' ,
+        'id_offre' ,
+        'statut'
     ];
+
+
 }

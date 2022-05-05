@@ -28,6 +28,12 @@
                         {{ __('Profil') }}
                     </x-nav-link>
                     @endif
+
+                    @if (\Illuminate\Support\Facades\Auth::user()->statut==0)
+                        <x-nav-link : href="candidatures">
+                            {{ __('Mes Candidatures') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

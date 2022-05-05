@@ -22,35 +22,25 @@
 
 
 
-                    $mescandidatures = DB::table('candidature')
-                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
-                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    $mescandidatures = DB::table('candidatures')
                     ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
                     ->select('*')
                     ->count();
 
-                    $mescandidaturesget = DB::table('candidature')
-                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
-                    ->join('offres','candidature.id_offre',"=",'offres.id')
-                    ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->id)
-                    ->select('*')
-                    ->get();
-
-                    $mescandidaturestrue = DB::table('candidature')
-                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
-                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    $mescandidaturestrue = DB::table('candidatures')
                     ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
-                    ->where('statut', true)
+                    ->where('statut',1)
                     ->select('*')
                     ->count();
 
-                    $mescandidaturesfalse = DB::table('candidature')
-                    ->join('candidats', 'candidature.id_candidat', '=', 'candidats.id')
-                    ->join('offres','candidature.id_offre',"=",'offres.id')
+                    $mescandidaturesfalse = DB::table('candidatures')
                     ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
-                    ->where('statut',false)
+                    ->where('statut',0)
                     ->select('*')
                     ->count();
+
+
+
                     @endphp
                     <div class="flex-1 text-right md:text-center">
                         <h5 class="font-bold uppercase text-gray-500">Mes Candidatures</h5>
@@ -70,7 +60,7 @@
                     </div>
                     <div class="flex-1 text-right md:text-center">
                         <h5 class="font-bold uppercase text-gray-500">Accepté</h5>
-                        <h3 class="font-bold text-3xl"> {{$mescandidaturestrue}}</h3>
+                        <h3 class="font-bold text-3xl"> {{$mescandidaturestrue}} / {{$mescandidatures }} </h3>
                     </div>
                 </div>
             </div>
@@ -85,44 +75,17 @@
                     </div>
                     <div class="flex-1 text-right md:text-center">
                         <h5 class="font-bold uppercase text-gray-500">refusé</h5>
-                        <h3 class="font-bold text-3xl">{{$mescandidaturesfalse}} </h3>
+                        <h3 class="font-bold text-3xl">{{$mescandidaturesfalse}} / {{$mescandidatures }} </h3>
                     </div>
                 </div>
             </div>
             <!--/Metric Card-->
         </div>
 
-
-
-
-
-
-
-
         </div>
 
 
-    <div class="w-1/2 ">
 
-        <!--Metric Card-->
-    @foreach($mescandidaturesget as $candidature)
-        <div class="bg-white border rounded shadow p-2">
-            <div class="flex flex-row items-center">
-                <div class="flex-1 text-right md:text-center">
-                    <h5 class="font-bold uppercase text-gray-500">Candidature -- Poste : {{$candidature->type}}</h5>
-                        <h3 class="font-bold text-3xl"> </h3>
-                    <hr>
-                        <p><i>Diplôme requis</i> : {{$candidature->diplome_requis}}  &nbsp;||&nbsp;<i>Votre diplôme : {{$candidature->diplome}}</i></p>
-                    <hr>
-                        <p><i>rémunération </i> : {{$candidature->remuneration}}</p>
-                    <hr>
-                        <p><i>ville :</i> {{$candidature->ville}}</p>
-                </div>
-            </div>
-        </div>
-    @endforeach
-        <!--/Metric Card-->
-    </div>
 
     </div>
 

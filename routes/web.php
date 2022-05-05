@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\CandidaturesController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,12 +33,13 @@ Route::get('/dashCandidat', function () {
 require __DIR__.'/auth.php';
 
 
-Route::resource('candidat',UserController::class);
+//Route::resource('candidat',UserController::class);
 //Route::any('candidat',UserController::class);
 
 //Route::post('/candidat/{candidat}/edit', [UserController::class, 'update'])->name('candidat.test');
-Route::post('/candidat/{user}/edit', [UserController::class, 'update'])->name('candidat.edit');
 
+Route::any('offres/{id}/candidater', [OffreController::class, 'candidater'])->name('candidater');
 Route::resource('offres',OffreController::class);
+Route::resource('user',UserController::class);
 
-
+Route::resource('candidatures',CandidaturesController::class)->middleware(['auth']);

@@ -2566,7 +2566,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         // Needed for arrow key navigation
         this.dropdownEl.tabIndex = 0;
 
-        // Only set tabindex if it hasn't been set by user
+        // Only set tabindex if it hasn't been set by candidat
         $(this.dropdownEl).children().each(function (el) {
           if (!el.getAttribute('tabindex')) {
             el.setAttribute('tabindex', 0);
@@ -5079,7 +5079,7 @@ $jscomp.polyfill = function (e, r, p, m) {
    * Attach Waves to an input element (or any element which doesn't
    * bubble mouseup/mousedown events).
    *   Intended to be used with dynamically loaded forms/inputs, or
-   * where the user doesn't want a delegated click handler.
+   * where the candidat doesn't want a delegated click handler.
    */
   Waves.attach = function (element) {
     //FUTURE: automatically add waves classes and allow users
@@ -5700,7 +5700,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         // Calculate raw deltaX
         var totalDeltaX = this._xPos - this._startingXpos;
 
-        // dragDirection is the attempted user drag direction
+        // dragDirection is the attempted candidat drag direction
         var dragDirection = totalDeltaX > 0 ? 'right' : 'left';
 
         // Don't allow totalDeltaX to exceed Sidenav width or be dragged in the opposite direction
@@ -5773,7 +5773,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           // Calculate raw deltaX
           var totalDeltaX = this._xPos - this._startingXpos;
 
-          // dragDirection is the attempted user drag direction
+          // dragDirection is the attempted candidat drag direction
           var dragDirection = totalDeltaX > 0 ? 'right' : 'left';
 
           // Don't allow totalDeltaX to exceed Sidenav width or be dragged in the opposite direction
@@ -11717,7 +11717,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         e.preventDefault();
         var option = $(e.target).closest('li')[0];
         var key = option.id;
-          
+
 
         if (!$(option).hasClass('disabled') && !$(option).hasClass('optgroup') && key.length) {
           var selected = true;
@@ -11760,7 +11760,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           this._setSelectedStates();
         }
       }
-      
+
       /**
        * Setup dropdown
        */
@@ -11982,7 +11982,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         }
         this.input.setAttribute('data-disabled', disabledData);
         this.input.value = values.join(', ');
-        
+
       }
 
       /**
