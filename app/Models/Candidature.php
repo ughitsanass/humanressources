@@ -12,7 +12,12 @@ class Candidature extends Model
     protected $fillable = [
         'id_candidat' ,
         'id_offre' ,
-        'statut'
+        'statut',
+        'q1',
+        'q2',
+        'q3',
+        'q4',
+        'q5'
     ];
 
 

@@ -51,6 +51,11 @@ class OffreController extends Controller
         $offre->ville=$request->ville;
         $offre->diplome_requis=$request->diplome_requis;
         $offre->remuneration=$request->remuneration;
+        $offre->q1=$request->q1;
+        $offre->q2=$request->q2;
+        $offre->q3=$request->q3;
+        $offre->q4=$request->q4;
+        $offre->q5=$request->q5;
         $offre->save();
         return redirect()->route('offres.index');
     }
@@ -99,15 +104,26 @@ class OffreController extends Controller
      */
     public function destroy($id)
     {
-        // destroy that shit bro
+        //
+    }
+
+    public function dossiercandidature($offre)
+    {
+        return view('offres.dossier', compact('offre'));
     }
 
 
-    public function candidater($id){
+    public function candidater($id , OffreRequest $request){
         Candidature::create([
             'id_offre' => $id,
             'id_candidat' => Auth::id(),
-            'statut' => 0
+            'statut' => 2,
+            'q1'=>$request->q1,
+            'q2'=>$request->q2,
+            'q3'=>$request->q3,
+            'q4'=>$request->q4,
+            'q5'=>$request->q5
+
         ]);
         return redirect()->route('offres.index')->with('candidature bien enregistrée');
     }

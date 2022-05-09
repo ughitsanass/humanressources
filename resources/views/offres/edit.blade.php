@@ -1,3 +1,4 @@
+@include('header')
 @php
 // id de l'utilisateur à partir de l'id recruteur :
 
@@ -12,7 +13,6 @@ $whoisme = DB::table('recruteurs')
 foreach ($whoisme as $wim){
 }
 
-
 //verification recruteur pour les droits : si le recruteur
 // && : opérateur et
 // || : opérateur ou
@@ -21,14 +21,12 @@ $rights = false;
 if ($recruteur->statut == 1 && $recruteur->id == $offre->id_recruteur){
     $rights = true;
 }
-echo $rights;
-
 
 @endphp
 
 
 
-@if($rights == true)
+@if($rights == true)                                                                               bo
         <div class="card">
     <header class="card-header">
         <p class="card-header-title">Modifier le N° {{$offre->id}}</p>
@@ -62,11 +60,11 @@ echo $rights;
         </div>
     </div>
 </div>
-    @endif
-<!--
-if(\Illuminate\Support\Facades\Auth::candidat()->id == $wim->id_utilisateur )
+@else
+ Vous n'êtes pas propriétaire de cette offre !
+    @php
+    redirect()->route('offres.index')
+    @endphp
+@endif
 
-endif
 
--->
-Vous n'êtes pas propriétaire de cette offre !

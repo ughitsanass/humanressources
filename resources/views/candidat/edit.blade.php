@@ -4,7 +4,7 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Candidat - @php if($candidat->id == \Illuminate\Support\Facades\Auth::user()->id) { echo old('name',$candidat->name); }else{
+    <title>Candidat - @php if($user->id == \Illuminate\Support\Facades\Auth::user()->id) { echo old('name',$user->name); }else{
     echo 'inconnu';
 } @endphp</title>
 </head>
@@ -15,7 +15,7 @@
 use App\Providers\RouteServiceProvider;use Illuminate\Support\Facades\DB;
 $myid = \Illuminate\Support\Facades\Auth::user()->id;
 
-if($candidat->id == $myid) {
+if($user->id == $myid) {
 
 $whoami = \Illuminate\Support\Facades\Auth::user()->statut;
 $whoisme = DB::table('candidats')
@@ -113,8 +113,8 @@ $diploma = $diplome->diplome;
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
                                                                                          width="150px"
                                                                                          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                    class="font-weight-bold">{{old('name',$candidat->name)}}</span><span
-                    class="text-black-50">{{old('name',$candidat->email)}}</span><span> </span></div>
+                    class="font-weight-bold">{{old('name',$user->name)}}</span><span
+                    class="text-black-50">{{old('name',$user->email)}}</span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -122,31 +122,31 @@ $diploma = $diplome->diplome;
                     <h4 class="text-right">Editer le profil</h4>
                 </div>
 
-                <form method="POST" action="{{ route('candidat.update', $candidat->id) }}">
+                <form method="POST" action="{{ route('user.update', $user->id) }}">
                     {{ csrf_field() }}
-                    {{ method_field('POST') }}
+                    {{ method_field('PUT') }}
                     <div class="row mt-2">
                         <div class="col-md-6"><label class="labels">Nom et prénom</label><input type="text"
                                                                                                 class="form-control"
-                                                                                                placeholder="{{old('name',$candidat->name)}}"
-                                                                                                value="{{old('name',$candidat->name)}}">
+                                                                                                placeholder="{{old('name',$user->name)}}"
+                                                                                                value="{{old('name',$user->name)}}">
                         </div>
 
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12"><label class="labels">Numéro de tel</label><input type="text"
                                                                                                  class="form-control"
-                                                                                                 placeholder="{{old('name',$candidat->numtel)}}"
-                                                                                                 value="{{old('name',$candidat->numtel)}}">
+                                                                                                 placeholder="{{old('name',$user->numtel)}}"
+                                                                                                 value="{{old('name',$user->numtel)}}">
                         </div>
                         <div class="col-md-12"><label class="labels">Addresse</label><input type="text"
                                                                                             class="form-control"
-                                                                                            placeholder="{{old('name',$candidat->adresse)}}" {{old('name',$candidat->adresse)}}>
+                                                                                            placeholder="{{old('name',$user->adresse)}}" {{old('name',$user->adresse)}}>
                         </div>
                         <div class="col-md-12"><label class="labels">Email</label><input type="text"
                                                                                          class="form-control"
-                                                                                         placeholder="{{old('name',$candidat->email)}}"
-                                                                                         value="{{old('name',$candidat->email)}}">
+                                                                                         placeholder="{{old('name',$user->email)}}"
+                                                                                         value="{{old('name',$user->email)}}">
                         </div>
 
                         @php

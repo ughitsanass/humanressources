@@ -39,7 +39,19 @@ require __DIR__.'/auth.php';
 //Route::post('/candidat/{candidat}/edit', [UserController::class, 'update'])->name('candidat.test');
 
 Route::any('offres/{id}/candidater', [OffreController::class, 'candidater'])->name('candidater');
-Route::resource('offres',OffreController::class);
+
 Route::resource('user',UserController::class);
 
 Route::resource('candidatures',CandidaturesController::class)->middleware(['auth']);
+
+Route::resource('offres',OffreController::class);
+
+$user = \Illuminate\Support\Facades\Auth::user();
+if (!isset($user)){
+    Route::any('offres/{id}/candidater', [OffreController::class, 'candidater'])->name('candidater')->middleware(['auth']);
+}else {
+    Route::any('offres/{id}/candidater', [OffreController::class, 'candidater'])->name('candidater');
+    }
+
+
+Route::any('offres/{id}/dossier',[OffreController::class, 'dossiercandidature'])->name('offres.dossier')->middleware(['auth']);

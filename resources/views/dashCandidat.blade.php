@@ -39,6 +39,12 @@
                     ->select('*')
                     ->count();
 
+                    $mescandidatureswait = DB::table('candidatures')
+                    ->where('id_candidat',\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())
+                    ->where('statut',2)
+                    ->select('*')
+                    ->count();
+
 
 
                     @endphp
@@ -74,12 +80,32 @@
                         <div class="rounded p-3 bg-yellow-600"><i class="fas fa-user-minus fa-2x fa-fw fa-inverse"></i></div>
                     </div>
                     <div class="flex-1 text-right md:text-center">
-                        <h5 class="font-bold uppercase text-gray-500">refusé</h5>
+                        <h5 class="font-bold uppercase text-gray-500">En Attente</h5>
+                        <h3 class="font-bold text-3xl">{{$mescandidatureswait}} / {{$mescandidatures }} </h3>
+                    </div>
+                </div>
+            </div>
+            <!--/Metric Card-->
+
+
+        </div>
+
+        <div class="w-full md:w-1/2 xl:w-1/3 p-3">
+            <!--Metric Card-->
+            <div class="bg-white border rounded shadow p-2">
+                <div class="flex flex-row items-center">
+                    <div class="flex-shrink pr-4">
+                        <div class="rounded p-3 bg-yellow-600"><i class="fas fa-user-minus fa-2x fa-fw fa-inverse"></i></div>
+                    </div>
+                    <div class="flex-1 text-right md:text-center">
+                        <h5 class="font-bold uppercase text-gray-500">Refusé</h5>
                         <h3 class="font-bold text-3xl">{{$mescandidaturesfalse}} / {{$mescandidatures }} </h3>
                     </div>
                 </div>
             </div>
             <!--/Metric Card-->
+
+
         </div>
 
         </div>

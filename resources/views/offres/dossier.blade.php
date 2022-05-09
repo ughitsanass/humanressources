@@ -1,5 +1,5 @@
 @include('header')
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
     <!-- CSS only -->
@@ -62,63 +62,44 @@
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Créer une offre</h4>
+                    <h4 class="text-right">Candidater</h4>
                 </div>
 
 
-                <form action="{{ route('offres.store') }}" method="POST">
+                @php
+                    // liste de candidatures + verification de si le candidat à déja candidaté
+                                            $question1 = DB::table('offres')
+                                                            ->select('q1')
+                                                            ->where('id',$offre)
+                                                            ->get();
+                                            foreach ($question1 as $q1) {
+                                            }
+
+                $question2 = DB::table('offres')
+                                                            ->select('q2')
+                                                            ->where('id',$offre)
+                                                            ->get();
+                                            foreach ($question2 as $q2) {
+                                            }
+                @endphp
+
+                <form action="{{route('candidater',$offre)}}" method="POST">
                     @csrf
-
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Intitulé de l'offre</label><input name="type" type="text"
-                                                                                                class="form-control"
-                                                                                                value="{{old('type')}}"
-                                                                                                placeholder="intitulé de l'offre">
-
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Ville</label><input name="ville" type="text"
-                                                                                                      class="form-control"
-                                                                                                      value="{{old('ville')}}"
-                                                                                                      placeholder="Ville">
-
-                        </div>
-                    </div>
-
-
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Diplôme requis</label><input name="diplome_requis" type="text"
-                                                                                                      class="form-control"
-                                                                                                      value="{{old('diplome_requis')}}"
-                                                                                                      placeholder="diplôme requis">
-
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Rémunération</label><input name="remuneration" type="text"
-                                                                                                      class="form-control"
-                                                                                                      value="{{old('remuneration')}}"
-                                                                                                      placeholder=remuneration>
-
-                        </div>
-                    </div>
-
                     Questions pour le candidat :
+
                     <br>
                     <br>
 
                     <div class="row mt-2">
                         <div class="col-md-6"><label class="labels">Question 1</label><input name="q1" type="text"
-                                                                                                 class="form-control"
-                                                                                                 value="{{old('q1')}}"
-                                                                                                 placeholder="Question 1">
+                                                                                             class="form-control"
+                                                                                             value="{{old('q1')}}"
+                                                                                             placeholder="{{$q1->q1}}">
 
                         </div>
                     </div>
                     <div class="row mt-2">
+                        <p>{{$q2->q2}}</p>
                         <div class="col-md-6"><label class="labels">Question 2</label><input name="q2" type="text"
                                                                                              class="form-control"
                                                                                              value="{{old('q2')}}"
@@ -160,9 +141,9 @@
                     <div class="field">
                         <div class="control">
                             <div style="margin-top: 2em">
-                            <button class="btn btn-primary profile-button" type="submit">Enregistrer 2</button>
-                            <a class="button is-info" href="{{ route('offres.index') }}">Retour à la liste</a>
-                                </div>
+                                <button class="btn btn-primary profile-button" type="submit">Enregistrer 2</button>
+                                <a class="button is-info" href="{{ route('offres.index') }}">Retour à la liste</a>
+                            </div>
                         </div>
                     </div>
 

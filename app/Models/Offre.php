@@ -17,6 +17,11 @@ class Offre extends Model
         'type' ,
         'ville',
         'diplome_requis',
-        'remuneration'
+        'remuneration',
+        'q1',
+        'q2',
+        'q3',
+        'q4',
+        'q5'
     ];
 }

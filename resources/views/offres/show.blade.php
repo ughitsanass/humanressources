@@ -1,3 +1,4 @@
+@include('header')
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,8 +59,11 @@
 
 
 
+@php
+$auth = \Illuminate\Support\Facades\Auth::user();
+@endphp
 
-
+@if(isset($auth))
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -116,7 +120,7 @@
                         <a href="{{ route('candidater', $offre->id) }}" class="card-link">Candidater</a>
                     @else
                         Vous avez déja candidaté à cette offre !
-                        <a href="candidatures" class="card-link">Ma Candidature</a>
+                        <a href="/candidatures" class="card-link">Ma Candidature</a>
                     @endif
 
                     <a href="{{\App\Providers\RouteServiceProvider::offres}}" class="card-link">Retour</a>
@@ -129,6 +133,59 @@
 </div>
 </div>
 
+@else
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                                                                                             width="150px"
+                                                                                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                        class="font-weight-bold"></span><span
+                        class="text-black-50"></span><span> </span></div>
+            </div>
+            <div class="col-md-8 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Détails sur l'offre {{$offre->id}}</h4>
+                    </div>
+
+
+                    <div class="row mt-2">
+                        <div class="col-md-12²">Intitulé de l'offre : {{$offre->id}}</div>
+                    </div>
+                    @php
+                        $recruteur = DB::table('offres')
+                        ->join('users','offres.id_recruteur',"=",'users.id')
+                        ->where('users.id','=',$offre->id_recruteur)
+                        ->get();
+                        foreach($recruteur as $therecruteur){}
+
+                    @endphp
+                    <div class="row mt-2">
+                        <div class="col-md-12²">Recruteur : {{$therecruteur->name}}</div>
+                    </div>
+
+
+                    <div class="row mt-2">
+                        <div class="col-md-12²">Diplôme requis : {{$offre->diplome_requis}}</div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12²">Rémunération : {{$offre->remuneration}} Euros.</div>
+                    </div>
+
+                    <br><br>
+
+
+                    <a href="{{\App\Providers\RouteServiceProvider::offres}}" class="card-link">Retour</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    @endif
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

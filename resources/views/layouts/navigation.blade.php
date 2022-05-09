@@ -23,17 +23,38 @@
                     </x-nav-link>
                     @endif
 
-                    @if (\Illuminate\Support\Facades\Auth::user()->statut==0)
+                    @if (\Illuminate\Support\Facades\Auth::user()->statut==1)
+                        <x-nav-link : href="offres">
+                            {{ __("Mes Offres d'emploi") }}
+                        </x-nav-link>
+                    @endif
+
+
                     <x-nav-link : href="candidat/{{\Illuminate\Support\Facades\Auth::user()->id}}/edit">
                         {{ __('Profil') }}
                     </x-nav-link>
-                    @endif
+
 
                     @if (\Illuminate\Support\Facades\Auth::user()->statut==0)
                         <x-nav-link : href="candidatures">
                             {{ __('Mes Candidatures') }}
                         </x-nav-link>
                     @endif
+
+                    @if (\Illuminate\Support\Facades\Auth::user()->statut==1)
+                        <x-nav-link : href="candidatures">
+                            {{ __('Candidatures') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (\Illuminate\Support\Facades\Auth::user()->statut==1)
+                        <x-nav-link : href="offres/create">
+                            {{ __('Créer une offre') }}
+                        </x-nav-link>
+                    @endif
+
+
+
                 </div>
             </div>
 
