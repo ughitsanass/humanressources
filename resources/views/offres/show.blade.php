@@ -101,10 +101,27 @@ $auth = \Illuminate\Support\Facades\Auth::user();
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-md-12²">Rémunération : {{$offre->remuneration}} Euros.</div>
+                    <div class="col-md-12²">Rémunération : {{$offre->remuneration}}.</div>
                 </div>
 
 <br><br>
+                <div class="row mt-2">
+                    @if(isset($offre->q1))
+                    <div class="col-md-12²">Qestion 1: {{$offre->q1}}.</div>
+                    @endif
+                        @if(isset($offre->q2))
+                            <div class="col-md-12²">Qestion 2: {{$offre->q2}}.</div>
+                        @endif
+                        @if(isset($offre->q3))
+                            <div class="col-md-12²">Qestion 3: {{$offre->q3}}.</div>
+                        @endif
+                        @if(isset($offre->q4))
+                            <div class="col-md-12²">Qestion 4: {{$offre->q4}}.</div>
+                        @endif
+                        @if(isset($offre->q5))
+                            <div class="col-md-12²">Qestion 5: {{$offre->q5}}.</div>
+                        @endif
+                </div>
 
                 @if(\Illuminate\Support\Facades\Auth::user()->statut == 0)
                     @php
@@ -173,6 +190,14 @@ $auth = \Illuminate\Support\Facades\Auth::user();
                     <div class="row mt-2">
                         <div class="col-md-12²">Rémunération : {{$offre->remuneration}} Euros.</div>
                     </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12²">Rémunération : {{$offre->q1}} Euros.</div>
+                    </div>
+<br><br><br>
+
+                    NB: <a href="{{route('login')}}"> Connecter vous </a> pour visualiser les questions.
+
 
                     <br><br>
 

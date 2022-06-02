@@ -55,3 +55,7 @@ if (!isset($user)){
 
 
 Route::any('offres/{id}/dossier',[OffreController::class, 'dossiercandidature'])->name('offres.dossier')->middleware(['auth']);
+Route::any('candidatures/{id}/examiner',[CandidaturesController::class, 'examiner'])->name('candidatures.examiner')->middleware(['auth']);
+Route::any('candidatures/{id}/accepterCandidature',[CandidaturesController::class, 'accepterCandidature'])->name('candidatures.accepter')->middleware(['auth']);
+Route::any('candidatures/{id}/refuserCandidature',[CandidaturesController::class, 'refuserCandidature'])->name('candidatures.refuser')->middleware(['auth']);
+Route::any('candidatures/{id}/attenteCandidature',[CandidaturesController::class, 'attenteCandidature'])->name('candidatures.attente')->middleware(['auth']);

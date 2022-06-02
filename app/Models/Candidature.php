@@ -13,11 +13,12 @@ class Candidature extends Model
         'id_candidat' ,
         'id_offre' ,
         'statut',
-        'q1',
-        'q2',
-        'q3',
-        'q4',
-        'q5'
+        'id_recruteur',
+        'r1',
+        'r2',
+        'r3',
+        'r4',
+        'r5'
     ];
 
 

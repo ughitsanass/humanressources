@@ -10,6 +10,7 @@
 <body>
 
 
+
 <style>
     body {
         background: rgb(99, 39, 120)
@@ -66,6 +67,8 @@
                 </div>
 
 
+
+
                 @php
                     // liste de candidatures + verification de si le candidat à déja candidaté
                                             $question1 = DB::table('offres')
@@ -81,6 +84,26 @@
                                                             ->get();
                                             foreach ($question2 as $q2) {
                                             }
+
+                $question3 = DB::table('offres')
+                                                            ->select('q3')
+                                                            ->where('id',$offre)
+                                                            ->get();
+                                            foreach ($question3 as $q3) {
+                                            }
+
+                $question4 = DB::table('offres')
+                                                            ->select('q4')
+                                                            ->where('id',$offre)
+                                                            ->get();
+                                            foreach ($question4 as $q4) {
+                                            }
+                                            $question5 = DB::table('offres')
+                                                            ->select('q5')
+                                                            ->where('id',$offre)
+                                                            ->get();
+                                            foreach ($question5 as $q5) {
+                                            }
                 @endphp
 
                 <form action="{{route('candidater',$offre)}}" method="POST">
@@ -89,52 +112,57 @@
 
                     <br>
                     <br>
-
+                    @if(isset($q1->q1))
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Question 1</label><input name="q1" type="text"
+                        <div class="col-md-6"><label class="labels">{{$q1->q1}}</label><input name="r1" type="text"
                                                                                              class="form-control"
-                                                                                             value="{{old('q1')}}"
-                                                                                             placeholder="{{$q1->q1}}">
+                                                                                             value="{{old('r1')}}">
+
+                        </div>
+
+                    </div>
+@endif
+
+                    @if(isset($q2->q2))
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">{{$q2->q2}}</label><input name="r2" type="text"
+                                                                                             class="form-control"
+                                                                                             value="{{old('r2')}}">
 
                         </div>
                     </div>
+                    @endif
+
+
+                    @if(isset($q3->q3))
                     <div class="row mt-2">
-                        <p>{{$q2->q2}}</p>
-                        <div class="col-md-6"><label class="labels">Question 2</label><input name="q2" type="text"
+                        <div class="col-md-6"><label class="labels">{{$q3->q3}}</label><input name="r3" type="text"
                                                                                              class="form-control"
-                                                                                             value="{{old('q2')}}"
-                                                                                             placeholder="Question 2">
+                                                                                             value="{{old('r3')}}">
 
                         </div>
                     </div>
+@endif
 
+                    @if(isset($q4->q4))
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Question 3</label><input name="q3" type="text"
+                        <div class="col-md-6"><label class="labels">{{$q4->q4}}</label><input name="r4" type="text"
                                                                                              class="form-control"
-                                                                                             value="{{old('q3')}}"
-                                                                                             placeholder="Question 3">
+                                                                                             value="{{old('r4')}}">
 
                         </div>
                     </div>
+                    @endif
 
+@if(isset($q5->q5))
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Question 4</label><input name="q4" type="text"
-                                                                                             class="form-control"
-                                                                                             value="{{old('q4')}}"
-                                                                                             placeholder="Question 4">
+                        <div class="col-md-6"><label class="labels">{{$q5->q5}}</label><input name="r5" type="text"
+                                                                                              class="form-control"
+                                                                                              value="{{old('r5')}}">
 
                         </div>
                     </div>
-
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Question 5</label><input name="q5" type="text"
-                                                                                             class="form-control"
-                                                                                             value="{{old('q5')}}"
-                                                                                             placeholder="Question 5">
-
-                        </div>
-                    </div>
-
+                    @endif
 
 
 

@@ -114,15 +114,19 @@ class OffreController extends Controller
 
 
     public function candidater($id , OffreRequest $request){
+
+        $recruteur = DB::table('offres')->where('id', $id)->first();
+
         Candidature::create([
             'id_offre' => $id,
             'id_candidat' => Auth::id(),
             'statut' => 2,
-            'q1'=>$request->q1,
-            'q2'=>$request->q2,
-            'q3'=>$request->q3,
-            'q4'=>$request->q4,
-            'q5'=>$request->q5
+            'id_recruteur' => $recruteur->id_recruteur,
+            'r1'=>$request->r1,
+            'r2'=>$request->r2,
+            'r3'=>$request->r3,
+            'r4'=>$request->r4,
+            'r5'=>$request->r5
 
         ]);
         return redirect()->route('offres.index')->with('candidature bien enregistrée');
